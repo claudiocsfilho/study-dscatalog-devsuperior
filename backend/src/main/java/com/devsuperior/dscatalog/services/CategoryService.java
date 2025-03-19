@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
+
 @Service
 public class CategoryService {
 
@@ -20,5 +22,11 @@ public class CategoryService {
        Page<Category> result = repository.findAll(pageable);
        Page<CategoryDTO> dto = result.map(CategoryDTO::new);
         return dto;
+    }
+
+    @Transactional(readOnly = true)
+    public CategoryDTO findById (Long id){
+        Category cat = repository.findById(id).orElseThrow(NoSuchElementException::new);
+        return new CategoryDTO(cat);
     }
 }
