@@ -19,12 +19,12 @@ public class CategoryController {
     private CategoryService service;
 
     @GetMapping
-    public ResponseEntity<Page<CategoryDTO>> findAll(Pageable pageable){
+    public ResponseEntity<Page<CategoryDTO>> findAll(Pageable pageable) {
         return ResponseEntity.ok().body(service.findAll(pageable));
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<CategoryDTO> findById(@PathVariable Long id){
+    public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 }
