@@ -28,4 +28,12 @@ public class CategoryService {
         Category cat = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found!"));
         return new CategoryDTO(cat);
     }
+
+    public CategoryDTO insert(CategoryDTO dto){
+        Category cat = new Category();
+        cat.setName(dto.getName());
+        cat = repository.save(cat);
+        return new CategoryDTO(cat);
+    }
+
 }
