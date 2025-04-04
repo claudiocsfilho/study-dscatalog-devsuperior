@@ -1,7 +1,6 @@
 package com.devsuperior.dscatalog.controllers.handlers;
 
 import com.devsuperior.dscatalog.controllers.exceptions.CustomError;
-import com.devsuperior.dscatalog.controllers.exceptions.FieldMessage;
 import com.devsuperior.dscatalog.controllers.exceptions.ValidationError;
 import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
