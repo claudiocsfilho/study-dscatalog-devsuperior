@@ -1,7 +1,10 @@
 package com.devsuperior.dscatalog.services;
 
+import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.dto.ProductDTO;
+import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.entities.Product;
+import com.devsuperior.dscatalog.repositories.CategoryRepository;
 import com.devsuperior.dscatalog.repositories.ProductRepository;
 import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
@@ -37,12 +40,17 @@ public class ProductServiceTests {
     @Mock
     private ProductRepository repository;
 
+    @Mock
+    private CategoryRepository categoryRepository;
+
     private long existingId;
     private long nonExistingId;
     private long dependentId;
     private PageImpl<Product> page;
     private Product product;
     private ProductDTO dto;
+    private Category category;
+    private CategoryDTO catDTO;
 
     @BeforeEach
     void setUp() {
@@ -54,6 +62,8 @@ public class ProductServiceTests {
         product = Factory.createProduct();
         page = new PageImpl<>(List.of(product));
         dto = Factory.createProductDTO();
+        category = Factory.createCategory();
+        catDTO = Factory.createCategoryDTO();
 
         //Configurando os comportamentos simulados
 
@@ -68,6 +78,7 @@ public class ProductServiceTests {
         when(repository.save(ArgumentMatchers.any())).thenReturn(product);
 
         //Comp. Update
+        when(categoryRepository.getReferenceById(catDTO.getId())).thenReturn(category);
         when(repository.getReferenceById(existingId)).thenReturn(product);
         when(repository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
 
